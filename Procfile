@@ -1,1 +1,1 @@
-web: python contact.py
+web: gunicorn startapp.wsgi
