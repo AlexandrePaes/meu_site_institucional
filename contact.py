@@ -3,8 +3,8 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for
 import json
-import shelve
-import googletrans
+# import shelve
+# import googletrans
 
 
 app = Flask(__name__)
