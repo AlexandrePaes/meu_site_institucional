@@ -4,7 +4,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 import json
 # import shelve
-# import googletrans
+import googletrans
 
 
 app = Flask(__name__)
@@ -30,22 +30,24 @@ def contact():
   #     "phone": phone,
   #   }
 
-  # # Translate the form data to English.
-  # translated_data = googletrans.translate(name, email, phone, dest="en")
+  # Translate the form data to English.
+  translated_data = googletrans.translate(name, email, phone, dest="en")
 
-  # # Return the translated data.
-  # yield translated_data
+  # Return the translated data.
+  yield translated_data
 
   # Save the data to a text file.
-  with open("data.txt", "w") as f:
+  with open("data.txt", "a") as f:
         f.write(json.dumps({
           "name": name,
           "email": email,
           "phone": phone,
           "message": message
         }))
+        f.write(' End of the Line.')
+        f.write('\n')
            
-  os.system('cat data.txt >> dados.txt') 
+  # os.system('cat data.txt >> dados.txt') 
 
   # Redirect the user to a confirmation page.
   return redirect(url_for("confirm"))
@@ -58,4 +60,5 @@ def confirm():
 
 
 if __name__ == "__main__":
-  app.run(debug=False)
+  app.run(host="0.0.0.0", port=80, debug=True)
+  # app.run(debug=False)
