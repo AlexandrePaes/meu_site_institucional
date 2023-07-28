@@ -63,5 +63,5 @@ def confirm():
 
 
 if __name__ == "__main__":
-  app.run(host="alexandrepaes-144b5fb19aac.herokuapp.com", port=8080, debug=False)
+  app.run(host="alexandrepaes-144b5fb19aac.herokuapp.com", port=8080, debug=True)
   # app.run(debug=True)
