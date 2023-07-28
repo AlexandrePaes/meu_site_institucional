@@ -13,10 +13,10 @@ app = Flask(__name__)
 def index():
   return render_template("institucional.html")
 
-@app.route('/favicon.ico')
-def favicon():
-    return favicon(os.path.join(app.root_path, 'images'),
-                               'favicon.ico')
+# @app.route('/favicon.ico')
+# def favicon():
+#     return favicon(os.path.join(app.root_path, 'images'),
+#                                'favicon.ico')
 
 @app.route("/contact", methods=["POST"])
 def contact():
