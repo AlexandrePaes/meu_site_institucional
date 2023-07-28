@@ -57,7 +57,7 @@ def contact():
   # Redirect the user to a confirmation page.
   return redirect(url_for("confirm"))
 
-@app.route("/confirm")
+@app.route("/confirm", methods=["POST"])
 def confirm():
   return render_template("confirm.html")
 
