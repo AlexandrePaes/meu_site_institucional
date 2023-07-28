@@ -16,7 +16,7 @@ def index():
 @app.route('/favicon.ico')
 def favicon():
     return favicon(os.path.join(app.root_path, 'images'),
-                               'favicon.ico', mimetype='image/png')
+                               'favicon.ico')
 
 @app.route("/contact", methods=["POST"])
 def contact():
