@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for
 # import os
 import json
 # import smtplib
-import googletrans
+# import googletrans
 
 # from dotenv import load_dotenv
 
@@ -18,7 +18,7 @@ def index():
     return render_template("institucional.html")
 
 
-@app.route("/contact", methods=["POST"])
+@app.route("/contact", methods=["GET","POST"])
 def contact():
     name = request.form.get("name")
     # print(name)
@@ -37,15 +37,15 @@ def contact():
 		"phone": phone,
 		"message": message
 		}))
-        f.write(' End of the Line.')
+        # f.write(' End of the Line.')
         f.write('\n')
 
 
-    # Translate the form data to English.
-    translated_data = googletrans.translate(name, email, phone, message, dest="en")
+    # # Translate the form data to English.
+    # translated_data = googletrans.translate(name, email, phone, message, dest="en")
 
-    # Return the translated data.
-    yield translated_data 
+    # # Return the translated data.
+    # yield translated_data 
 
   # Create a SMTP object and connect to the mail server.
     # smtp_server = "smtp.gmail.com"
@@ -69,11 +69,11 @@ def contact():
     return redirect(url_for("confirm"))
 
 
-@app.route("/confirm", methods=["POST"])
+@app.route("/confirm", methods=["GET","POST"])
 def confirm():
     return render_template("confirm.html")
 
 
 if __name__ == "__main__":
-  app.run(host="alexandrepaes-144b5fb19aac.herokuapp.com", port=8080, debug=False)
-  #app.run(debug=True)
+  #app.run(host="alexandrepaes-144b5fb19aac.herokuapp.com", port=8080, debug=False)
+  app.run(debug=True)
