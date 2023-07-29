@@ -2,7 +2,6 @@
 
 from flask import Flask, render_template, request, redirect, url_for
 import os
-import json
 import smtplib
 import googletrans
 
@@ -47,10 +46,9 @@ def contact():
 
     server = smtplib.SMTP(smtp_server, smtp_port)
     server.set_debuglevel(1)
-    #server.ehlo()
+    server.ehlo()
     server.starttls()
     server.login(smtp_username, smtp_password)
-    #server.close()
 
     # Send the email.
     message = f"Subject: New Contact\n\nName: {name}\n \
@@ -61,11 +59,12 @@ def contact():
     # Redirect the user to a confirmation page.
     return redirect(url_for("confirm"))
 
+
 @app.route("/confirm", methods=["POST"])
 def confirm():
     return render_template("confirm.html")
 
 
 if __name__ == "__main__":
-  app.run(host="alexandrepaes-144b5fb19aac.herokuapp.com", port=8080, debug=False)
-  #app.run(debug=True)
+  #app.run(host="alexandrepaes-144b5fb19aac.herokuapp.com", port=8080, debug=False)
+  app.run(debug=True)
