@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for
 import os
+import json
 import smtplib
 import googletrans
 
@@ -19,24 +20,24 @@ def contact():
     email = request.form.get("email")
     phone = request.form.get("phone")
     message = request.form.get("message")
+    
+	# Save the data to a text file.
+    with open("data.txt", "a") as f:
+        f.write(json.dumps({
+		"name": name,
+		"email": email,
+		"phone": phone,
+		"message": message
+		}))
+        f.write(' End of the Line.')
+        f.write('\n')
 
 
   # Translate the form data to English.
     translated_data = googletrans.translate(name, email, phone, dest="en")
 
     # Return the translated data.
-    yield translated_data
-    # Save the data to a text file.
-	
-	# with open("data.txt", "a") as f:
-    #     f.write(json.dumps({
-	# 	"name": name,
-	# 	"email": email,
-	# 	"phone": phone,
-	# 	"message": message
-	# 	}))
-    #     f.write(' End of the Line.')
-	# 	f.write('\n') 
+    yield translated_data 
 
   # Create a SMTP object and connect to the mail server.
     smtp_server = "smtp.gmail.com"
@@ -54,7 +55,7 @@ def contact():
     message = f"Subject: New Contact\n\nName: {name}\n \
                 Email: {email}\nPhone: {phone}\nMessage: {message}"
     
-    server.sendmail(email, smtp_username, message)
+    server.sendmail(email, smtp_username, message)	
 
     # Redirect the user to a confirmation page.
     return redirect(url_for("confirm"))
