@@ -1,14 +1,14 @@
 #!/bin/bash
 
 from flask import Flask, render_template, request, redirect, url_for
-import os
+# import os
 import json
-import smtplib
+# import smtplib
 import googletrans
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()  # take environment variables from .env.
+# load_dotenv()  # take environment variables from .env.
 
 
 app = Flask(__name__)
@@ -48,22 +48,22 @@ def contact():
     yield translated_data 
 
   # Create a SMTP object and connect to the mail server.
-    smtp_server = "smtp.gmail.com"
-    smtp_port = 587
-    smtp_username = os.environ["GMAIL_USER"]
-    smtp_password = os.environ["GMAIL_PASSWORD"]
+    # smtp_server = "smtp.gmail.com"
+    # smtp_port = 587
+    # smtp_username = os.environ["GMAIL_USER"]
+    # smtp_password = os.environ["GMAIL_PASSWORD"]
 
-    server = smtplib.SMTP(smtp_server, smtp_port)
-    # server.set_debuglevel(1)
-    # server.ehlo()
-    server.starttls()
-    server.login(smtp_username, smtp_password)
+    # server = smtplib.SMTP(smtp_server, smtp_port)
+    # # server.set_debuglevel(1)
+    # # server.ehlo()
+    # server.starttls()
+    # server.login(smtp_username, smtp_password)
 
-    # Send the email.
-    message = f"Subject: New Contact\n\nName: {name}\n \
-                Email: {email}\nPhone: {phone}\nMessage: {message}"
+    # # Send the email.
+    # message = f"Subject: New Contact\n\nName: {name}\n \
+    #             Email: {email}\nPhone: {phone}\nMessage: {message}"
     
-    server.sendmail(email, smtp_username, message)	
+    # server.sendmail(email, smtp_username, message)	
 
     # Redirect the user to a confirmation page.
     return redirect(url_for("confirm"))
