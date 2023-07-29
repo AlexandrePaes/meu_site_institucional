@@ -6,6 +6,10 @@ import json
 import smtplib
 import googletrans
 
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
+
 
 app = Flask(__name__)
 
@@ -17,9 +21,13 @@ def index():
 @app.route("/contact", methods=["POST"])
 def contact():
     name = request.form.get("name")
+    # print(name)
     email = request.form.get("email")
+    # print(email)
     phone = request.form.get("phone")
+    # print(phone)
     message = request.form.get("message")
+    # print(message)
     
 	# Save the data to a text file.
     with open("data.txt", "a") as f:
@@ -33,8 +41,8 @@ def contact():
         f.write('\n')
 
 
-  # Translate the form data to English.
-    translated_data = googletrans.translate(name, email, phone, dest="en")
+    # Translate the form data to English.
+    translated_data = googletrans.translate(name, email, phone, message, dest="en")
 
     # Return the translated data.
     yield translated_data 
@@ -46,8 +54,8 @@ def contact():
     smtp_password = os.environ["GMAIL_PASSWORD"]
 
     server = smtplib.SMTP(smtp_server, smtp_port)
-    server.set_debuglevel(1)
-    server.ehlo()
+    # server.set_debuglevel(1)
+    # server.ehlo()
     server.starttls()
     server.login(smtp_username, smtp_password)
 
