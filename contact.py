@@ -30,7 +30,7 @@ def contact():
     # print(message)
     
 	# Save the data to a text file.
-    with open("data.txt", "a") as f:
+    with open("/app/data.txt", "a") as f:
         f.write(json.dumps({
 		"name": name,
 		"email": email,
